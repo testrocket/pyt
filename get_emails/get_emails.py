@@ -6,8 +6,6 @@ import sys
 OUTPUT_FILENAME = "emails_set.csv"
 PATTERN_EMAIL = re.compile('([\w\-\.]+@(\w[\w\-]+\.)+[\w\-]+)')
 
-file_extensions = sys.argv[1:] or ['.txt', '.csv']
-
 def process(emails, dirname, filename):
 	data = open(os.path.join(dirname, filename), 'rb')
 	for line in data:
@@ -25,7 +23,7 @@ def calc_folders_count():
 		total_folders += 1
 	return total_folders
 	
-def emails_search():	
+def emails_search(file_extensions):	
 	folder_counter = 0
 	total_folders = calc_folders_count()
 
@@ -40,8 +38,9 @@ def emails_search():
 
 		show_progress(folder_counter, total_folders)
 	return emails
-	
-emails = emails_search()
+
+file_extensions = sys.argv[1:] or ['.txt', '.csv']
+emails = emails_search(file_extensions)
 if not emails:
 	print 'No emails found'
 	exit(1)
