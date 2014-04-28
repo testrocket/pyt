@@ -8,8 +8,7 @@ PATTERN_EMAIL = re.compile('([\w\-\.]+@(\w[\w\-]+\.)+[\w\-]+)')
 
 file_extensions = sys.argv[1:] or ['.txt', '.csv']
 
-emails = dict()
-def process(dirname, filename):
+def process(emails, dirname, filename):
 	data = open(os.path.join(dirname, filename), 'rb')
 	for line in data:
 		for match in PATTERN_EMAIL.findall(line):
@@ -19,22 +18,30 @@ def show_progress(current, total):
 	percent = int(current / float(total) * 100)
 	sys.stdout.write("\r%s%s completed" % (percent, "%"))
 	sys.stdout.flush()
+	
+def calc_folders_count():
+	total_folders = 0
+	for dirname, dirnames, filenames in os.walk('.'):
+		total_folders += 1
+	return total_folders
+	
+def emails_search():	
+	folder_counter = 0
+	total_folders = calc_folders_count()
 
-total_folders = 0
-for dirname, dirnames, filenames in os.walk('.'):
-	total_folders += 1
+	emails = dict()
+	for dirname, dirnames, filenames in os.walk('.'):
+		folder_counter += 1
+		for filename in filenames:
+			for file_ext in file_extensions:
+				if filename.endswith(file_ext):
+					process(emails, dirname, filename)
+					break
 
-folder_counter = 0
-for dirname, dirnames, filenames in os.walk('.'):
-	folder_counter += 1
-	for filename in filenames:
-		for file_ext in file_extensions:
-			if filename.endswith(file_ext):
-				process(dirname, filename)
-				break
-
-	show_progress(folder_counter, total_folders)
-
+		show_progress(folder_counter, total_folders)
+	return emails
+	
+emails = emails_search()
 if not emails:
 	print 'No emails found'
 	exit(1)
