@@ -1,5 +1,5 @@
-import sys
 import datetime
+import sys
 import re
 
 from selenium import webdriver
@@ -24,15 +24,14 @@ if not station_to:
 	print("To station not specified")
 	exit(1)
 	
-now = datetime.datetime.now()
-time = datetime.time(now.hour, now.minute)
-	
 station_time = re.search("time:\s*(\d{1,2}):(\d{1,2})", line_args)
 if station_time:
 	time = datetime.time(int(station_time.group(1)), int(station_time.group(2)))
+else:
+	now = datetime.datetime.now()
+	time = datetime.time(now.hour, now.minute)
 
 driver = webdriver.Firefox()
-
 driver.get("http://www.rozklad-pkp.pl/")
 driver.maximize_window()
 driver.implicitly_wait(7)
