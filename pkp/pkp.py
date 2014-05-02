@@ -31,7 +31,26 @@ else:
 	now = datetime.datetime.now()
 	time = datetime.time(now.hour, now.minute)
 
-driver = webdriver.Firefox()
+browser = re.search("browser:\s*(\w+)", line_args)
+if browser:
+	browser_name = browser.group(1).lower()
+	if browser_name == "firefox":
+		driver = webdriver.Firefox()
+	elif browser_name == "chrome":
+		driver = webdriver.Chrome()
+	elif browser_name == "opera":
+		driver = webdriver.Opera()
+	elif browser_name == "ie":
+		driver = webdriver.Ie()
+	elif browser_name == "safari":
+		driver = webdriver.Safari()
+	else:
+		print("Unknown browser name: %s" % browser_name)
+		exit(1)
+else:
+	driver = webdriver.Firefox()
+
+
 driver.get("http://www.rozklad-pkp.pl/")
 driver.maximize_window()
 
