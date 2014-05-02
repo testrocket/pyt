@@ -34,7 +34,6 @@ else:
 driver = webdriver.Firefox()
 driver.get("http://www.rozklad-pkp.pl/")
 driver.maximize_window()
-driver.implicitly_wait(7)
 
 input_from = driver.find_element(By.ID, "from")
 input_to = driver.find_element(By.ID, "to")
