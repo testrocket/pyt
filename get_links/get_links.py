@@ -34,5 +34,3 @@ for link in links:
 	body.send_keys(Keys.CONTROL + 't')
 	body.send_keys(link)
 	body.send_keys(Keys.ENTER)
-
-	driver.implicitly_wait(2)
