@@ -29,11 +29,10 @@ def new_tab(link):
 	body.send_keys(link)
 	body.send_keys(Keys.ENTER)
 
-
 line_args = " ".join(sys.argv)
 
-pts = re.search("pts:\s*(\d+)", line_args)
-min_points = int(pts.group(1)) if pts else 0
+points = re.search("pts:\s*(\d+)", line_args)
+min_points = int(points.group(1)) if points else 0
 	
 domain = re.search("domain:\s*(\w+.\w+)", line_args)
 domain_name = domain.group(1) if domain else "imgur.com"
