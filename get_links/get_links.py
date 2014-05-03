@@ -26,7 +26,7 @@ for entry in entries:
 		continue
 	
 	link = entry.find_element(By.CSS_SELECTOR, 'span.domain a')
-	if link.text == "i.imgur.com":
+	if "imgur.com" in link.text:
 		links.append(entry.find_element(By.CSS_SELECTOR, 'p.title a').get_attribute("href"))
 	
 for link in links:
