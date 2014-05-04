@@ -8,7 +8,10 @@ def error_msg(msg):
 	exit(1)
 
 def process(img_url, download=None):
-	print("number of bytes = %s " %len(request.urlopen(img_url).read()))
+	file = request.urlopen(img_url)
+	size = file.headers.get("content-length")
+	file.close()
+	print("number of bytes = %s " % size)
 
 if len(sys.argv) < 2:
 	error_msg("Incorrect number of args")
@@ -37,7 +40,6 @@ if not contains_match:
 	exit(0)
 
 contains_pattern = contains_match.group(1)
-print(contains_pattern)
 for img_match in img_matches:
 	if contains_pattern in img_match:
 		process(img_match, download_match)
