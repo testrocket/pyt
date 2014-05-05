@@ -46,7 +46,9 @@ if not emails:
 	exit(1)
 	
 print '\nFound %s emails in directories:' % len(emails)
-for directory in emails.values():
+
+directories = set(emails.values())
+for directory in directories:
 	print directory
 
 emails_sorted = sorted(emails.keys())
