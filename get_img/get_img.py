@@ -7,7 +7,7 @@ def error_msg(msg):
 	print(msg)
 	exit(1)
 
-def process(img_url, download=None):
+def process_image(img_url, download=None):
 	file = request.urlopen(img_url)
 	size = file.headers.get("content-length")
 	file.close()
@@ -42,4 +42,4 @@ if not contains_match:
 contains_pattern = contains_match.group(1)
 for img_match in img_matches:
 	if contains_pattern in img_match:
-		process(img_match, download_match)
+		process_image(img_match, download_match)
