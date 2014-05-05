@@ -14,7 +14,7 @@ def process(emails, dirname, filename):
 			
 def show_progress(current, total):
 	percent = int(current / float(total) * 100)
-	sys.stdout.write("\r%s%s completed" % (percent, "%"))
+	sys.stdout.write("\rSearching for emails in files - %s%s completed..." % (percent, "%"))
 	sys.stdout.flush()
 	
 def calc_folders_count():
@@ -42,10 +42,13 @@ def emails_search(file_extensions):
 file_extensions = sys.argv[1:] or ['.txt', '.csv']
 emails = emails_search(file_extensions)
 if not emails:
-	print 'No emails found'
+	print 'No emails found.'
 	exit(1)
 	
-print '\nFound %s emails' % (len(emails))
+print '\nFound %s emails in directories:' % len(emails)
+for directory in emails.values():
+	print directory
+
 emails_sorted = sorted(emails.keys())
 
 output_file = open(OUTPUT_FILENAME, 'wb')
