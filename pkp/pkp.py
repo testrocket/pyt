@@ -5,7 +5,6 @@ import re
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
 if len(sys.argv) < 3:
@@ -49,7 +48,6 @@ if browser:
 		exit(1)
 else:
 	driver = webdriver.Firefox()
-
 
 driver.get("http://www.rozklad-pkp.pl/")
 driver.maximize_window()
