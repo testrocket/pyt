@@ -7,7 +7,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 
 if len(sys.argv) < 3:
-	print("Expected at least 2 arguments - start and stop station")
+	print("Expected at least 2 arguments (from and to station), example usage: ")
+	print("- 'python pkp.py from: gdynia orlowo to: gdansk przymorze'")
+	print("- 'python pkp.py from: gdynia orlowo to: gdansk przymorze time: 12:00'")
 	exit(1)
 
 line_args = " ".join(sys.argv)
